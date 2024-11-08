@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -17,24 +18,23 @@ public class Employee {
     private String firstName;
     private String lastName;
     private Date birthday;
-
     private Integer depId;
     private Date entryDate;
 
     @OneToMany(mappedBy = "chief", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonIgnore
-    private ArrayList<Departament> departamentsList = new ArrayList<>();
+    private List<Departament> departamentsList = new ArrayList<>();
 
     @OneToOne
-    @JoinColumn(name = "posId", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "posId", referencedColumnName = "id", nullable = true)
     private Position position;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonIgnore
-    private ArrayList<Visit> visitantList = new ArrayList<>();
+    private List<Visit> visitantList = new ArrayList<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonIgnore
-    private ArrayList<ProjectAssigment> projectAssignments = new ArrayList<>();
+    private List<ProjectAssigment> projectAssignments = new ArrayList<>();
 
 }
